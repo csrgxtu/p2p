@@ -14,14 +14,21 @@ public class Client {
   // private int srvPort = 9901;
 
   public static void main(String[] args) throws Exception {
+    if (args.length != 2) {
+      System.out.println("Usage: Client serverIP serverPort");
+      System.exit(1);
+    }
+
+    String serverIP = args[0];
+    int serverPort = Integer.parseInt(args[1]);
     BufferedReader inFromUser = new BufferedReader(new InputStreamReader(System.in));
     DatagramSocket clientSocket = new DatagramSocket();
-    InetAddress IPAddress = InetAddress.getByName("localhost");
+    InetAddress IPAddress = InetAddress.getByName(serverIP);
     byte[] sendData = new byte[1024];
     byte[] receiveData = new byte[1024];
     String sentence = inFromUser.readLine();
     sendData = sentence.getBytes();
-    DatagramPacket sendPacket = new DatagramPacket(sendData,sendData.length, IPAddress, 9901);
+    DatagramPacket sendPacket = new DatagramPacket(sendData,sendData.length, IPAddress, serverPort);
     clientSocket.send(sendPacket);
     DatagramPacket receivePacket = new DatagramPacket(receiveData, receiveData.length);
     clientSocket.receive(receivePacket);

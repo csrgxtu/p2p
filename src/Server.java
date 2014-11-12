@@ -13,7 +13,11 @@ import java.net.*;
 public class Server {
 
   public static void main(String[] args) throws Exception {
-    int listenPort = 9901;
+    if (args.length != 1) {
+      System.out.println("Usage: Server port");
+      System.exit(1);
+    }
+    int listenPort = Integer.parseInt(args[0]);
     DatagramSocket serverSocket = new DatagramSocket(listenPort);
     byte[] receiveData = new byte[1024];
     byte[] sendData = new byte[1024];
@@ -22,11 +26,11 @@ public class Server {
       DatagramPacket receivePacket = new DatagramPacket(receiveData, receiveData.length);
       serverSocket.receive(receivePacket);
       String sentence = new String(receivePacket.getData());
+      System.out.println("Client Socket: " + receivePacket.getAddress().toString() + ":" + Integer.toString(receivePacket.getPort()));
       System.out.println("Received: " + sentence);
 
       InetAddress IPAddress = receivePacket.getAddress();
       int port = receivePacket.getPort();
-      System.out.println("Client Socket: " + IPAddress.toString() + ":" + Integer.toString(port));
       String capitalizedSentence = sentence.toUpperCase();
       sendData = capitalizedSentence.getBytes();
       DatagramPacket sendPacket = new DatagramPacket(sendData, sendData.length, IPAddress, port);
