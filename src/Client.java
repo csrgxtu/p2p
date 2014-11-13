@@ -34,6 +34,6 @@ public class Client {
     clientSocket.receive(receivePacket);
     String modifiedSentence = new String(receivePacket.getData());
     System.out.println("From Server: " + modifiedSentence);
-    clientSocket.close();
+    // clientSocket.close();
   }
 }
