@@ -30,7 +30,9 @@ public class Client {
     String sentence = inFromUser.readLine();
     sendData = sentence.getBytes();
     DatagramPacket sendPacket = new DatagramPacket(sendData,sendData.length, IPAddress, serverPort);
+    System.out.println("Debug: before sendData");
     clientSocket.send(sendPacket);
+    System.out.println("Debug: after sendData");
     DatagramPacket receivePacket = new DatagramPacket(receiveData, receiveData.length);
     clientSocket.receive(receivePacket);
     String modifiedSentence = new String(receivePacket.getData());

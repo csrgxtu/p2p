@@ -39,10 +39,16 @@ public class Server extends Thread {
         System.out.println("Client Socket: " + IPAddress.toString() + Integer.toString(port));
         System.out.println("Received: " + sentence);
 
-        /*String capitalizedSentence = sentence.toUpperCase();
+        try {
+          Thread.sleep(5000);
+        } catch (InterruptedException ex) {
+          System.out.println("InterruptedException");
+        }
+
+        String capitalizedSentence = sentence.toUpperCase();
         sendData = capitalizedSentence.getBytes();
         DatagramPacket sendPacket = new DatagramPacket(sendData, sendData.length, IPAddress, port);
-        serverSocket.send(sendPacket);*/
+        serverSocket.send(sendPacket);
       }
     } catch (IOException e) {
       e.printStackTrace();
