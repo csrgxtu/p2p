@@ -27,21 +27,23 @@ public class Server extends Thread {
 
   public void run() {
     try {
-      byte[] receiveData = new byte[1024];
-      byte[] sendData = new byte[1024];
-      DatagramPacket receivePacket = new DatagramPacket(receiveData,receiveData.length);
+      while (true) {
+        byte[] receiveData = new byte[1024];
+        byte[] sendData = new byte[1024];
+        DatagramPacket receivePacket = new DatagramPacket(receiveData,receiveData.length);
 
-      serverSocket.receive(receivePacket);
-      String sentence = new String(receivePacket.getData());
-      InetAddress IPAddress = receivePacket.getAddress();
-      int port = receivePacket.getPort();
-      System.out.println("Client Socket: " + IPAddress.toString() + Integer.toString(port));
-      System.out.println("Received: " + sentence);
+        serverSocket.receive(receivePacket);
+        String sentence = new String(receivePacket.getData());
+        InetAddress IPAddress = receivePacket.getAddress();
+        int port = receivePacket.getPort();
+        System.out.println("Client Socket: " + IPAddress.toString() + Integer.toString(port));
+        System.out.println("Received: " + sentence);
 
-      /*String capitalizedSentence = sentence.toUpperCase();
-      sendData = capitalizedSentence.getBytes();
-      DatagramPacket sendPacket = new DatagramPacket(sendData, sendData.length, IPAddress, port);
-      serverSocket.send(sendPacket);*/
+        /*String capitalizedSentence = sentence.toUpperCase();
+        sendData = capitalizedSentence.getBytes();
+        DatagramPacket sendPacket = new DatagramPacket(sendData, sendData.length, IPAddress, port);
+        serverSocket.send(sendPacket);*/
+      }
     } catch (IOException e) {
       e.printStackTrace();
     }

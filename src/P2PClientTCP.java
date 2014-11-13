@@ -26,8 +26,10 @@ public class P2PClientTCP {
       // Create an output stream to send data to server
       DataOutputStream outputToServer = new DataOutputStream(socket.getOutputStream());
       // BufferedReader inFromUser = new BufferedReader(new InputStreamReader(System.in));
-      // System.out.print("Enter a sentence[ENTER]: ");
-      int number = 1;
+      System.out.print("Enter a char(number)[ENTER]: ");
+      BufferedReader bufferRead = new BufferedReader(new InputStreamReader(System.in));
+      int number = Integer.parseInt(bufferRead.readLine());
+      // int number = 1;
       outputToServer.writeInt(number);
       // outputToServer.flush();
 

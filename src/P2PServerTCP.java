@@ -77,14 +77,19 @@ public class P2PServerTCP {
         // continuouly server the client
         while (true) {
           int number = inputFromClient.readInt();
-          System.out.println("Reveived from client: " + clientIP + ":" + Integer.toString(clientPort) + number);
+          System.out.println("Reveived from client: " + clientIP + ":" + Integer.toString(clientPort) + " " + number);
           outputToClient.writeInt(number);
           
           /*String sentence = inputFromClient.readLine();
           outputToClient.writeBytes(sentence.toUpperCase());*/
         }
       } catch (IOException e) {
-        System.err.println(e);
+        // System.err.println(e);
+        try {
+          socket.close();
+        } catch (IOException ex) {
+          //
+        }
       }
     }
   }

@@ -26,6 +26,7 @@ public class Client {
     InetAddress IPAddress = InetAddress.getByName(serverIP);
     byte[] sendData = new byte[1024];
     byte[] receiveData = new byte[1024];
+    System.out.print("Enter a string[ENTER]: ");
     String sentence = inFromUser.readLine();
     sendData = sentence.getBytes();
     DatagramPacket sendPacket = new DatagramPacket(sendData,sendData.length, IPAddress, serverPort);
@@ -34,6 +35,6 @@ public class Client {
     clientSocket.receive(receivePacket);
     String modifiedSentence = new String(receivePacket.getData());
     System.out.println("From Server: " + modifiedSentence);
-    // clientSocket.close();
+    clientSocket.close();
   }
 }
