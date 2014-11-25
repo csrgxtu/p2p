@@ -38,9 +38,10 @@ public class Server extends Thread {
         int port = receivePacket.getPort();
         System.out.println("Client Socket: " + IPAddress.toString() + Integer.toString(port));
         System.out.println("Received: " + sentence);
-
+        
+        /*
         try {
-          Thread.sleep(5000);
+          Thread.sleep(1000);
         } catch (InterruptedException ex) {
           System.out.println("InterruptedException");
         }
@@ -49,6 +50,7 @@ public class Server extends Thread {
         sendData = capitalizedSentence.getBytes();
         DatagramPacket sendPacket = new DatagramPacket(sendData, sendData.length, IPAddress, port);
         serverSocket.send(sendPacket);
+        */
       }
     } catch (IOException e) {
       e.printStackTrace();

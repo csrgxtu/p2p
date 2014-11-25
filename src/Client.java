@@ -30,13 +30,20 @@ public class Client {
     String sentence = inFromUser.readLine();
     sendData = sentence.getBytes();
     DatagramPacket sendPacket = new DatagramPacket(sendData,sendData.length, IPAddress, serverPort);
-    System.out.println("Debug: before sendData");
+    //System.out.println("Debug: before sendData");
     clientSocket.send(sendPacket);
-    System.out.println("Debug: after sendData");
+    //System.out.println("Debug: after sendData");
     DatagramPacket receivePacket = new DatagramPacket(receiveData, receiveData.length);
     clientSocket.receive(receivePacket);
     String modifiedSentence = new String(receivePacket.getData());
-    System.out.println("From Server: " + modifiedSentence);
+    System.out.println("From Peer: " + modifiedSentence);
+
+    InetAddress PeerAddress = receivePacket.getAddress();
+    int PeerPort = receivePacket.getPort();
+    byte[] response = new byte[1024];
+    response = "Got it!!!".getBytes();
+    DatagramPacket peerPacket = new DatagramPacket(response, response.length, PeerAddress, PeerPort);
+    clientSocket.send(peerPacket);
     clientSocket.close();
   }
 }
